@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="org.ancit.utils.wexplorer.launch.commands.OpenInExplorerCommand"
+            description="This Command opens the selected Resource in OS File Explorer"
+            id="org.ancit.utils.wexplorer.launch.OpenCommand"
+            name="Open in Windows Xplorer">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.main.menu?after=window">
+         <menu
+               label="System Xplorer">
+            <command
+                  commandId="org.ancit.utils.wexplorer.launch.OpenCommand"
+                  icon="icons/repository.gif"
+                  label="Open in Windows Explorer"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+
+</plugin>

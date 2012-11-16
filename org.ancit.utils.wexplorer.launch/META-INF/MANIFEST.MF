@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Launch
+Bundle-SymbolicName: org.ancit.utils.wexplorer.launch;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.ancit.utils.wexplorer.launch.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.debug.core;bundle-version="3.7.0",
+ org.eclipse.debug.ui;bundle-version="3.7.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
