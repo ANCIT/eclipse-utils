@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.ancit.util.zipmail.projectContribution"
+            nameFilter="*"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action
+               class="org.ancit.util.zipmail.ZipAndMailProjectAction"
+               enablesFor="1"
+               id="org.ancit.util.zipmail.ZipAndMailProjectAction"
+               label="Zip and Email Project"
+               menubarPath="additions">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.ancit.util.zipmail.ZipAndEmailConfigurationPreferencePage"
+            id="org.ancit.util.zipmail.page1"
+            name="Zip &amp; Mail Configuration">
+      </page>
+   </extension>
+
+</plugin>
