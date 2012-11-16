@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.ancit.util.explorer.objectContribution1"
+            objectClass="org.eclipse.core.resources.IContainer">
+         <action
+               class="org.ancit.utils.wexplorer.OpenInWindowExplorerAction"
+               icon="icons/repository.gif"
+               id="org.ancit.utils.wexplorer.OpenInWindowExplorerAction"
+               label="Show in Windows Explorer"
+               menubarPath="additions">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
