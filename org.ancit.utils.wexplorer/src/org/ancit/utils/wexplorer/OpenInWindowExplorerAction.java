@@ -28,10 +28,12 @@ public class OpenInWindowExplorerAction implements IObjectActionDelegate {
 	public void run(IAction action) {
 		try {
 			
-			File file = new File(folder.getLocation().toOSString());
-			if (Desktop.isDesktopSupported()) {
-				Desktop desktop = Desktop.getDesktop();						
-				desktop.open(file);						
+			if(folder != null) {
+				File file = new File(folder.getLocation().toOSString());
+				if (Desktop.isDesktopSupported()) {
+					Desktop desktop = Desktop.getDesktop();						
+					desktop.open(file);						
+				}
 			}
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
@@ -48,7 +50,9 @@ public class OpenInWindowExplorerAction implements IObjectActionDelegate {
 		Object selectedElement = ((IStructuredSelection)selection).getFirstElement();
 		if (selectedElement instanceof IContainer) {
 			folder = (IContainer) selectedElement;
-			
+			action.setEnabled(true);
+		} else {
+			action.setEnabled(false);
 		}
 		
 	}
