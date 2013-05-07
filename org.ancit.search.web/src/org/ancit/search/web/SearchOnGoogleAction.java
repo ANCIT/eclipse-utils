@@ -6,7 +6,9 @@ import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IObjectActionDelegate;
@@ -18,7 +20,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.AbstractTextEditor;
 
-public class SearchOnGoogleAction implements IObjectActionDelegate, IViewActionDelegate {
+public class SearchOnGoogleAction implements IObjectActionDelegate,
+		IViewActionDelegate {
 
 	private String searchText;
 
@@ -49,55 +52,55 @@ public class SearchOnGoogleAction implements IObjectActionDelegate, IViewActionD
 
 	public void selectionChanged(IAction action, ISelection selection) {
 
-		
-		if(selection instanceof IStructuredSelection) {
-			// get active editor
-			IWorkbenchPage activePage = Activator.getDefault().getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage();
-			
-			if(activePage == null) {
-				return;
-			}
-			
-			IEditorPart editorPart = activePage
-					.getActiveEditor();
+		if (selection instanceof IStructuredSelection) {
 
-			if (editorPart instanceof AbstractTextEditor) {
-				// check if there is text selection
-				IEditorSite iEditorSite = editorPart.getEditorSite();
-				if (iEditorSite != null) {
-					ISelectionProvider selectionProvider = iEditorSite
-							.getSelectionProvider();
-					if (selectionProvider != null) {
-						ISelection iSelection = selectionProvider
-								.getSelection();
-						if (!iSelection.isEmpty()) {
-							searchText = ((ITextSelection) iSelection)
-									.getText();
-							if (searchText.trim().length() > 0) {
-								action.setEnabled(true);
-								action.setText("Search on Google for "
-										+ searchText);
-//								System.out.println(searchText);
-							} else {
-								action.setEnabled(false);
+			if (!selection.isEmpty()
+					&& ((IStructuredSelection) selection).getFirstElement() instanceof IEditorInput) {
+				// get active editor
+				IWorkbenchPage activePage = Activator.getDefault()
+						.getWorkbench().getActiveWorkbenchWindow()
+						.getActivePage();
+
+				if (activePage == null) {
+					return;
+				}
+
+				IEditorPart editorPart = activePage.getActiveEditor();
+
+				if (editorPart instanceof AbstractTextEditor) {
+					// check if there is text selection
+					IEditorSite iEditorSite = editorPart.getEditorSite();
+					if (iEditorSite != null) {
+						ISelectionProvider selectionProvider = iEditorSite
+								.getSelectionProvider();
+						if (selectionProvider != null) {
+							ISelection iSelection = selectionProvider
+									.getSelection();
+							if (!iSelection.isEmpty()) {
+								searchText = ((ITextSelection) iSelection)
+										.getText();
+								if (searchText.trim().length() > 0) {
+									action.setEnabled(true);
+									action.setText("Search on Google for "
+											+ searchText);
+									// System.out.println(searchText);
+								} else {
+									action.setEnabled(false);
+								}
 							}
 						}
 					}
 				}
-
 			} else {
 				action.setEnabled(false);
 			}
 		} else if (selection instanceof ITextSelection) {
 			if (!selection.isEmpty()) {
-				searchText = ((ITextSelection) selection)
-						.getText();
+				searchText = ((ITextSelection) selection).getText();
 				if (searchText.trim().length() > 0) {
 					action.setEnabled(true);
-					action.setText("Search on Google for "
-							+ searchText);
-//					System.out.println(searchText);
+					action.setText("Search on Google for " + searchText);
+					// System.out.println(searchText);
 				} else {
 					action.setEnabled(false);
 				}
@@ -111,7 +114,7 @@ public class SearchOnGoogleAction implements IObjectActionDelegate, IViewActionD
 
 	public void init(IViewPart view) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
