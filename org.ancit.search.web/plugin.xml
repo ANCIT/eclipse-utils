@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            category="org.eclipse.ui"
+            class="org.ancit.search.web.GoogleSearchView"
+            id="org.ancit.spy.editors.GoogleSearchView"
+            name="Google Search"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.ancit.search.web.objectContribution3"
+            nameFilter="*.*"
+            objectClass="org.eclipse.ui.IEditorInput">
+         <action
+               class="org.ancit.search.web.SearchOnGoogleAction"
+               enablesFor="1"
+               icon="icons/google.png"
+               id="org.ancit.search.web.SearchOnGoogleAction"
+               label="Search on Google">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
