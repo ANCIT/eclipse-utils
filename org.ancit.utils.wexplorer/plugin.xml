@@ -11,8 +11,13 @@
                class="org.ancit.utils.wexplorer.OpenInWindowExplorerAction"
                icon="icons/repository.gif"
                id="org.ancit.utils.wexplorer.OpenInWindowExplorerAction"
-               label="Show in Windows Explorer"
+               label="Show in File Explorer"
                menubarPath="additions">
+            <enablement>
+               <objectClass
+                     name="org.eclipse.core.resources.IContainer">
+               </objectClass>
+            </enablement>
          </action>
       </objectContribution>
    </extension>
