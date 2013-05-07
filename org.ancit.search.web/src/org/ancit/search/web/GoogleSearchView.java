@@ -17,7 +17,7 @@ import org.eclipse.ui.part.ViewPart;
 public class GoogleSearchView extends ViewPart {
 
 	public static final String ID = "org.ancit.spy.editors.GoogleSearchView"; //$NON-NLS-1$
-	static String url = "https://www.google.com/#output=search&q=";
+	static String url = "https://www.google.co.in/#output=search&q=";
 	private Browser browser;
 
 	public GoogleSearchView() {
