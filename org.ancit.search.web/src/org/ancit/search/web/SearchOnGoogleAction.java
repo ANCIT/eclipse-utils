@@ -5,17 +5,20 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IObjectActionDelegate;
+import org.eclipse.ui.IViewActionDelegate;
+import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.AbstractTextEditor;
 
-public class SearchOnGoogleAction implements IObjectActionDelegate {
+public class SearchOnGoogleAction implements IObjectActionDelegate, IViewActionDelegate {
 
 	private String searchText;
 
@@ -47,6 +50,7 @@ public class SearchOnGoogleAction implements IObjectActionDelegate {
 	public void selectionChanged(IAction action, ISelection selection) {
 
 		
+		if(selection instanceof IStructuredSelection) {
 			// get active editor
 			IWorkbenchPage activePage = Activator.getDefault().getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage();
@@ -85,11 +89,29 @@ public class SearchOnGoogleAction implements IObjectActionDelegate {
 			} else {
 				action.setEnabled(false);
 			}
-		
+		} else if (selection instanceof ITextSelection) {
+			if (!selection.isEmpty()) {
+				searchText = ((ITextSelection) selection)
+						.getText();
+				if (searchText.trim().length() > 0) {
+					action.setEnabled(true);
+					action.setText("Search on Google for "
+							+ searchText);
+//					System.out.println(searchText);
+				} else {
+					action.setEnabled(false);
+				}
+			}
+		}
 	}
 
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
 
+	}
+
+	public void init(IViewPart view) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

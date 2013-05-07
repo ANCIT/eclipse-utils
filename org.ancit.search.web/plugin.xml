@@ -22,10 +22,21 @@
                class="org.ancit.search.web.SearchOnGoogleAction"
                enablesFor="1"
                icon="icons/google.png"
-               id="org.ancit.search.web.SearchOnGoogleAction"
+               id="org.ancit.search.web.SearchOnGoogleActionOnEditor"
                label="Search on Google">
          </action>
       </objectContribution>
+      <viewerContribution
+            id="org.ancit.search.web.viewerContribution1"
+            targetID="org.eclipse.debug.ui.ProcessConsoleType.#ContextMenu">
+         <action
+               class="org.ancit.search.web.SearchOnGoogleAction"
+               icon="icons/google.png"
+               id="org.ancit.search.web.SearchOnGoogleActionOnConsole"
+               label="Search on Google"
+               menubarPath="additions">
+         </action>
+      </viewerContribution>
    </extension>
 
 </plugin>
