@@ -90,7 +90,7 @@ public class SendMail {
 
 	         // Send the complete message parts
 	         simpleMessage.setContent(multipart );
- 
+	         
 			Transport.send(simpleMessage);
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
