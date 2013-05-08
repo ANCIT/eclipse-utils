@@ -38,5 +38,20 @@
          </action>
       </viewerContribution>
    </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.eclipse.ui.trim.status">
+         <toolbar
+               id="org.ancit.search.web.searchbar"
+               label="Search Bar">
+            <control
+                  class="org.ancit.search.web.controlContributions.GoogleSearchControlContribution"
+                  id="org.ancit.search.web.controlContributions.GoogleSearchControlContribution">
+            </control>
+         </toolbar>
+      </menuContribution>
+   </extension>
 
 </plugin>
