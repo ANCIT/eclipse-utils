@@ -39,6 +39,7 @@ public class ZipAndMailProjectAction implements IObjectActionDelegate,
 	public void run(IAction action) {
 		zipProject();
 		emailProject();
+		
 
 	}
 
@@ -53,10 +54,12 @@ public class ZipAndMailProjectAction implements IObjectActionDelegate,
 			String to = emailInformationDialog.getEmailTo();
 			String subject = emailInformationDialog.getSubject();
 			String message = emailInformationDialog.getBodyText();
-			outFolder = new File("c:/out/" + project.getName() + ".zip");
+			outFolder = new File(System.getProperty("user.home") + System.getProperty("file.separator") + project.getName()+".zip");
 			SendMail sendMail = new SendMail(from, to, subject, message,
 					outFolder.getAbsolutePath());
 			sendMail.send();
+			
+			outFolder.delete();
 
 		}
 
@@ -67,7 +70,7 @@ public class ZipAndMailProjectAction implements IObjectActionDelegate,
 		try {
 
 			ArchiveFileExportOperation exportOperation = new ArchiveFileExportOperation(
-					project, "c:/out/" + project.getName()+".zip");
+					project, System.getProperty("user.home") + System.getProperty("file.separator") + project.getName()+".zip");
 			exportOperation.run(new NullProgressMonitor());
 		}
 		
