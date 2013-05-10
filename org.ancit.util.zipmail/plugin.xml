@@ -9,7 +9,7 @@
             nameFilter="*"
             objectClass="org.eclipse.core.resources.IProject">
          <action
-               class="org.ancit.util.zipmail.ZipAndMailProjectAction"
+               class="org.ancit.util.zipmail.actions.ZipAndMailProjectAction"
                enablesFor="1"
                id="org.ancit.util.zipmail.ZipAndMailProjectAction"
                label="Zip and Email Project"
@@ -20,8 +20,8 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            class="org.ancit.util.zipmail.ZipAndEmailConfigurationPreferencePage"
-            id="org.ancit.util.zipmail.page1"
+            class="org.ancit.util.zipmail.preferences.ZipAndEmailConfigurationPreferencePage"
+            id="org.ancit.util.zipmail.preferences.ZipAndEmailConfigurationPreferencePage"
             name="Zip &amp; Mail Configuration">
       </page>
    </extension>

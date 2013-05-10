@@ -1,5 +1,6 @@
-package org.ancit.util.zipmail;
+package org.ancit.util.zipmail.preferences;
 
+import org.ancit.util.zipmail.Activator;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.jface.resource.ImageDescriptor;

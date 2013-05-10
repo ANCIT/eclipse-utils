@@ -1,4 +1,4 @@
-package org.ancit.util.zipmail;
+package org.ancit.util.zipmail.dialogs;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
