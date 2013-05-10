@@ -1,4 +1,4 @@
-package org.ancit.search.web;
+package org.ancit.search.sysout;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -9,7 +9,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.ancit.search.web"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "org.ancit.search.sysout"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;

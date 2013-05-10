@@ -22,10 +22,36 @@
                class="org.ancit.search.web.SearchOnGoogleAction"
                enablesFor="1"
                icon="icons/google.png"
-               id="org.ancit.search.web.SearchOnGoogleAction"
+               id="org.ancit.search.web.SearchOnGoogleActionOnEditor"
                label="Search on Google">
          </action>
       </objectContribution>
+      <viewerContribution
+            id="org.ancit.search.web.viewerContribution1"
+            targetID="org.eclipse.debug.ui.ProcessConsoleType.#ContextMenu">
+         <action
+               class="org.ancit.search.web.SearchOnGoogleAction"
+               icon="icons/google.png"
+               id="org.ancit.search.web.SearchOnGoogleActionOnConsole"
+               label="Search on Google"
+               menubarPath="additions">
+         </action>
+      </viewerContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.eclipse.ui.trim.status">
+         <toolbar
+               id="org.ancit.search.web.searchbar"
+               label="Search Bar">
+            <control
+                  class="org.ancit.search.web.controlContributions.GoogleSearchControlContribution"
+                  id="org.ancit.search.web.controlContributions.GoogleSearchControlContribution">
+            </control>
+         </toolbar>
+      </menuContribution>
    </extension>
 
 </plugin>
