@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="org.ancit.search.sysout.searhAction"
+            label="Sysout Search"
+            visible="true">
+         <action 
+               class="org.ancit.search.sysout.actions.SearchForSysout"
+               icon="icons/comment.png"
+               id="org.ancit.search.sysout.actions.SearchForSysout"
+               label="Search for Sysout"
+               style="push"
+               toolbarPath="additions"
+               tooltip="Click to Comment All Sysout across Workspace">
+         </action>
+      </actionSet>
+   </extension>
+
+</plugin>
