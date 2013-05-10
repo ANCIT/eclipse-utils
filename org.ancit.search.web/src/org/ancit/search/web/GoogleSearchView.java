@@ -1,17 +1,15 @@
 package org.ancit.search.web;
 
+import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.jface.text.ITextSelection;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.ISelectionListener;
-import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
 public class GoogleSearchView extends ViewPart {
@@ -19,6 +17,7 @@ public class GoogleSearchView extends ViewPart {
 	public static final String ID = "org.ancit.spy.editors.GoogleSearchView"; //$NON-NLS-1$
 	static String url = "https://www.google.co.in/#output=search&q=";
 	private Browser browser;
+	private Action action;
 
 	public GoogleSearchView() {
 	}
@@ -45,6 +44,15 @@ public class GoogleSearchView extends ViewPart {
 	 */
 	private void createActions() {
 		// Create the actions
+		{
+			action = new Action("New Action") {
+				@Override
+				public void run() {
+					browser.back();
+				}
+			};
+			action.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_TOOL_BACK));
+		}
 	}
 
 	/**
@@ -53,6 +61,7 @@ public class GoogleSearchView extends ViewPart {
 	private void initializeToolBar() {
 		IToolBarManager toolbarManager = getViewSite().getActionBars()
 				.getToolBarManager();
+		toolbarManager.add(action);
 	}
 
 	/**
