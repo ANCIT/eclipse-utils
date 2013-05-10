@@ -78,9 +78,17 @@ public class GoogleSearchView extends ViewPart {
 	}
 
 	public void updateBrowser(String searchText) {
-		this.setPartName(searchText + " - Google Search - ");
+		this.setPartName(getTitleText(searchText) + " - Google Search - ");
 		String searchURL = url + searchText;
 		browser.setUrl(searchURL);
 	}
 
+	private String getTitleText(String searchText2) {
+		// TODO Auto-generated method stub
+		if(searchText2.trim().length()>20){
+				return searchText2.trim().substring(0,19)+"...";
+		}
+		else
+			return searchText2;
+	}
 }

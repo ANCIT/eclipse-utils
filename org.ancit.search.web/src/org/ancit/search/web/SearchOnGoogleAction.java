@@ -6,9 +6,7 @@ import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
@@ -26,13 +24,7 @@ public class SearchOnGoogleAction implements IObjectActionDelegate,
 
 	private String searchText;
 
-	private static final String TITLE = "Do Stuff";
-	private static final int TEXT_REPLACE_ALL = 0;
-	private static final int TEXT_REPLACE_SELECTED = 1;
-	private static final int TEXT_INSERT = 2;
-	private int textOutputMode = 0;
-	private String textOutput = null;
-	private Shell shell;
+
 
 	public SearchOnGoogleAction() {
 		// TODO Auto-generated constructor stub
@@ -55,7 +47,7 @@ public class SearchOnGoogleAction implements IObjectActionDelegate,
 				if(result) {
 					 view = (GoogleSearchView) PlatformUI
 							.getWorkbench().getActiveWorkbenchWindow()
-							.getActivePage().showView(GoogleSearchView.ID,"viewid"+Math.random(), IWorkbenchPage.VIEW_VISIBLE);
+							.getActivePage().showView(GoogleSearchView.ID,"viewid"+Math.random(), IWorkbenchPage.VIEW_ACTIVATE);
 					
 				} else {
 					 view = (GoogleSearchView) PlatformUI
@@ -65,7 +57,7 @@ public class SearchOnGoogleAction implements IObjectActionDelegate,
 					
 				}
 			}
-		
+			
 			view.updateBrowser(searchText);
 		} catch (PartInitException e) {
 			// TODO Auto-generated catch block
@@ -106,7 +98,7 @@ public class SearchOnGoogleAction implements IObjectActionDelegate,
 								if (searchText.trim().length() > 0) {
 									action.setEnabled(true);
 									action.setText("Search on Google for "
-											+ searchText);
+											+ getActionText(searchText));
 									// System.out.println(searchText);
 								} else {
 									action.setEnabled(false);
@@ -123,13 +115,22 @@ public class SearchOnGoogleAction implements IObjectActionDelegate,
 				searchText = ((ITextSelection) selection).getText();
 				if (searchText.trim().length() > 0) {
 					action.setEnabled(true);
-					action.setText("Search on Google for " + searchText);
+					action.setText("Search on Google for " + getActionText(searchText));
 					// System.out.println(searchText);
 				} else {
 					action.setEnabled(false);
 				}
 			}
 		}
+	}
+
+	private String getActionText(String searchText2) {
+		// TODO Auto-generated method stub
+		if(searchText2.trim().length()>20){
+				return searchText2.trim().substring(0,19)+"...";
+		}
+		else
+			return searchText2;
 	}
 
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
@@ -140,5 +141,7 @@ public class SearchOnGoogleAction implements IObjectActionDelegate,
 		// TODO Auto-generated method stub
 
 	}
+	
+	
 
 }
