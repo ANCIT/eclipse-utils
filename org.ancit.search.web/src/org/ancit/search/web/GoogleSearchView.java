@@ -78,6 +78,7 @@ public class GoogleSearchView extends ViewPart {
 	}
 
 	public void updateBrowser(String searchText) {
+		this.setPartName(searchText + " - Google Search - ");
 		String searchURL = url + searchText;
 		browser.setUrl(searchURL);
 	}

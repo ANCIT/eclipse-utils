@@ -7,6 +7,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -39,9 +40,32 @@ public class SearchOnGoogleAction implements IObjectActionDelegate,
 
 	public void run(IAction action) {
 		try {
-			GoogleSearchView view = (GoogleSearchView) PlatformUI
-					.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-					.showView(GoogleSearchView.ID);
+			
+			IViewPart part = PlatformUI
+			.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+			.findView(GoogleSearchView.ID);
+			GoogleSearchView view = null;
+			if (part == null) {
+				view = (GoogleSearchView) PlatformUI
+						.getWorkbench().getActiveWorkbenchWindow()
+						.getActivePage().showView(GoogleSearchView.ID);
+				
+			} else {
+				boolean result = MessageDialog.openConfirm(Display.getDefault().getActiveShell(), "New Tab Confirmation", "Search View is already open. Do you want to open a new Tab ?");
+				if(result) {
+					 view = (GoogleSearchView) PlatformUI
+							.getWorkbench().getActiveWorkbenchWindow()
+							.getActivePage().showView(GoogleSearchView.ID,"viewid"+Math.random(), IWorkbenchPage.VIEW_VISIBLE);
+					
+				} else {
+					 view = (GoogleSearchView) PlatformUI
+								.getWorkbench().getActiveWorkbenchWindow()
+								.getActivePage().showView(GoogleSearchView.ID);
+					 
+					
+				}
+			}
+		
 			view.updateBrowser(searchText);
 		} catch (PartInitException e) {
 			// TODO Auto-generated catch block

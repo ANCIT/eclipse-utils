@@ -1,4 +1,4 @@
-package org.ancit.util.zipmail;
+package org.ancit.util.zipmail.actions;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,6 +9,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.ancit.util.zipmail.Activator;
+import org.ancit.util.zipmail.dialogs.EmailInformationDialog;
+import org.ancit.util.zipmail.utils.SendMail;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
