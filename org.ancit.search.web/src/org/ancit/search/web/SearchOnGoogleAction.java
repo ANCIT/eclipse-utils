@@ -55,7 +55,7 @@ public class SearchOnGoogleAction implements IObjectActionDelegate,
 				if(result) {
 					 view = (GoogleSearchView) PlatformUI
 							.getWorkbench().getActiveWorkbenchWindow()
-							.getActivePage().showView(GoogleSearchView.ID,"viewid"+Math.random(), IWorkbenchPage.VIEW_VISIBLE);
+							.getActivePage().showView(GoogleSearchView.ID,"viewid"+Math.random(), IWorkbenchPage.VIEW_ACTIVATE);
 					
 				} else {
 					 view = (GoogleSearchView) PlatformUI
