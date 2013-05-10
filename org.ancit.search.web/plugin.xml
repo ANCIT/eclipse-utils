@@ -4,8 +4,10 @@
    <extension
          point="org.eclipse.ui.views">
       <view
+            allowMultiple="true"
             category="org.eclipse.ui"
             class="org.ancit.search.web.GoogleSearchView"
+            icon="icons/google.png"
             id="org.ancit.spy.editors.GoogleSearchView"
             name="Google Search"
             restorable="true">
