@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.ancit.search.sysout.Activator;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -21,12 +22,18 @@ import org.eclipse.search.core.text.TextSearchEngine;
 import org.eclipse.search.core.text.TextSearchMatchAccess;
 import org.eclipse.search.core.text.TextSearchRequestor;
 import org.eclipse.search.ui.text.FileTextSearchScope;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.IWorkbenchWindowActionDelegate;
+import org.eclipse.ui.IWorkbenchWindowPulldownDelegate;
 
-public class SearchForSysout implements IWorkbenchWindowActionDelegate {
+public class SearchForSysout implements IWorkbenchWindowPulldownDelegate {
 	
 	List<ReplaceEdit> replaces = new ArrayList<ReplaceEdit>();
 	HashMap changes = new HashMap();
@@ -36,12 +43,17 @@ public class SearchForSysout implements IWorkbenchWindowActionDelegate {
 
 	public void run(IAction action) {
 		
-		changes.clear();
+		  changes.clear();	 
+		  patternMap.clear();
 		  
 		  patternMap.put("//System.out.println","System.out.println");
 		  patternMap.put("System.out.println", "//System.out.println");
-		  
-		  String[] fileNamePatterns = { "*" }; //$NON-NLS-1$ // all files with file suffix 'special'
+		  searchAndReplace(1);
+			  
+	}
+
+	private void searchAndReplace(int type) {
+		String[] fileNamePatterns = { "*" }; //$NON-NLS-1$ // all files with file suffix 'special'
 		  IResource[] roots = rootResources == null ? new IResource[]{ResourcesPlugin
 				  .getWorkspace().getRoot()} : rootResources;
 
@@ -73,7 +85,12 @@ public class SearchForSysout implements IWorkbenchWindowActionDelegate {
 			
 			  for (String pattern : patternMap.keySet()) {
 				  inUse = pattern;
-				  Pattern regEx = Pattern.compile(pattern);
+				  Pattern regEx;
+				  if(type == 1) {
+					regEx = Pattern.compile(pattern);  
+				  } else {
+				    regEx = TextSearchEngine.createDefault().createPattern(pattern, true, true);
+				  }
 				  TextSearchEngine.createDefault().search(scope, collector, regEx,
 						     new NullProgressMonitor());
 
@@ -90,9 +107,6 @@ public class SearchForSysout implements IWorkbenchWindowActionDelegate {
 
 				  changes.clear();
 			}
-			  				// TODO Auto-generated catch block
-	  
-			  
 	}
 
 	public void selectionChanged(IAction action, ISelection selection) {
@@ -120,6 +134,38 @@ public class SearchForSysout implements IWorkbenchWindowActionDelegate {
 	public void init(IWorkbenchWindow window) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public Menu getMenu(Control parent) {
+		Menu menu = new Menu(parent);
+
+		MenuItem searchAndCommentMenu = new MenuItem(menu, SWT.PUSH);
+		searchAndCommentMenu.setText("Search and Comment");
+		searchAndCommentMenu.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				changes.clear();
+				patternMap.clear();
+				patternMap.put("//System.out.println","System.out.println");
+				  patternMap.put("System.out.println", "//System.out.println");
+				  searchAndReplace(1);
+			}
+		});
+
+		MenuItem searchAndDeleteMenu = new MenuItem(menu, SWT.PUSH);
+		searchAndDeleteMenu.setText("Search and Delete");
+		searchAndDeleteMenu.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				changes.clear();
+				patternMap.clear();
+				patternMap.put("//System.out.println","System.out.println");
+				  patternMap.put("System.out.println.*", "");
+				  searchAndReplace(2);
+			}
+		});
+		
+		return menu;
 	}
 
 }

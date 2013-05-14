@@ -7,14 +7,15 @@
             id="org.ancit.search.sysout.searhAction"
             label="Sysout Search"
             visible="true">
-         <action 
+         <action
                class="org.ancit.search.sysout.actions.SearchForSysout"
                icon="icons/comment.png"
                id="org.ancit.search.sysout.actions.SearchForSysout"
                label="Search for Sysout"
-               style="push"
+               pulldown="true"
+               style="pulldown"
                toolbarPath="additions"
-               tooltip="Click to Comment All Sysout across Workspace">
+               tooltip="Click to Comment All Sysout">
          </action>
       </actionSet>
    </extension>
