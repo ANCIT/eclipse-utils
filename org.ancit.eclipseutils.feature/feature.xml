@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.ancit.eclipseutils.feature"
+      label="Eclipse Util Features"
+      version="1.0.0.qualifier"
+      provider-name="ANCIT">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.search"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.ltk.core.refactoring"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.core.resources" version="3.7.100" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="org.ancit.search.sysout"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.ancit.search.web"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.ancit.util.zipmail"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.ancit.utils.wexplorer"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
