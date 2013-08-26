@@ -1,16 +1,19 @@
 package org.ancit.search.sysout.actions;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.ancit.search.sysout.Activator;
+import org.eclipse.core.commands.Command;
+import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jdt.ui.actions.IJavaEditorActionDefinitionIds;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -26,12 +29,16 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.ReplaceEdit;
+import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowPulldownDelegate;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.commands.ICommandService;
 
 public class SearchForSysout implements IWorkbenchWindowPulldownDelegate {
 	
@@ -63,7 +70,7 @@ public class SearchForSysout implements IWorkbenchWindowPulldownDelegate {
 		  TextSearchRequestor collector = new TextSearchRequestor() {
 			   public boolean acceptPatternMatch(TextSearchMatchAccess matchAccess)
 			     throws CoreException {
-			    IFile file = matchAccess.getFile();
+			    final IFile file = matchAccess.getFile();
 			    
 			    TextChange change = (TextChange)changes.get(file);
 			    if(change == null) {
@@ -85,11 +92,12 @@ public class SearchForSysout implements IWorkbenchWindowPulldownDelegate {
 			
 			  for (String pattern : patternMap.keySet()) {
 				  inUse = pattern;
-				  Pattern regEx;
+				  Pattern regEx = null;
 				  if(type == 1) {
 					regEx = Pattern.compile(pattern);  
-				  } else {
-				    regEx = TextSearchEngine.createDefault().createPattern(pattern, true, true);
+				  } 
+				  else {
+				    regEx = TextSearchEngine.createPattern(pattern, true, true);
 				  }
 				  TextSearchEngine.createDefault().search(scope, collector, regEx,
 						     new NullProgressMonitor());
@@ -101,9 +109,26 @@ public class SearchForSysout implements IWorkbenchWindowPulldownDelegate {
 				  
 				  try {
 					result.perform(new NullProgressMonitor());
+					final ICommandService cmdService = (ICommandService)PlatformUI.getWorkbench().getService    (ICommandService.class);
+				    if (cmdService != null) {
+				        final Command cmd = cmdService.getCommand(IJavaEditorActionDefinitionIds.ORGANIZE_IMPORTS);
+				        final ExecutionEvent execEvt = new ExecutionEvent(cmd, Collections.EMPTY_MAP, ((IStructuredSelection)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService().getSelection(IPageLayout.ID_PROJECT_EXPLORER)).getFirstElement(), null);
+				        Display.getDefault().syncExec(new Runnable() {
+				            public void run() {
+				                try {
+				                    cmd.executeWithChecks(execEvt);
+//				                    cmd.execute(execEvt);
+				                } catch (Exception e) {
+				                    e.printStackTrace();
+				                }
+				            }
+				        });
+				    }
 				} catch (CoreException e) {
 					e.printStackTrace();
 				}
+				  
+				  
 
 				  changes.clear();
 			}
@@ -111,8 +136,9 @@ public class SearchForSysout implements IWorkbenchWindowPulldownDelegate {
 
 	public void selectionChanged(IAction action, ISelection selection) {
 		if(selection.isEmpty()) {
-			rootResources = new IResource[]{ResourcesPlugin.getWorkspace().getRoot()};
+			action.setEnabled(false);
 		} else {
+			action.setEnabled(true);
 			if (selection instanceof IStructuredSelection) {
 				IStructuredSelection sSelection = (IStructuredSelection) selection;
 				Object selectedObject = sSelection.getFirstElement();
@@ -162,6 +188,22 @@ public class SearchForSysout implements IWorkbenchWindowPulldownDelegate {
 				patternMap.put("//System.out.println","System.out.println");
 				  patternMap.put("System.out.println.*", "");
 				  searchAndReplace(2);
+			}
+		});
+		
+		MenuItem searchPrintStackTraceAndReplaceMenu = new MenuItem(menu, SWT.PUSH);
+		searchPrintStackTraceAndReplaceMenu.setText("Search and Replace PrintStackTrace");
+		searchPrintStackTraceAndReplaceMenu.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				changes.clear();
+				patternMap.clear();
+				  patternMap.put("e.printStackTrace(.*.);", "StatusManager.getManager().handle(new Status(IStatus.ERROR, \"\", e.getMessage(), e));");
+				  searchAndReplace(2);
+				  
+				  
+			
+				  
 			}
 		});
 		
