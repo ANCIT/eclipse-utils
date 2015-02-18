@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.ancit.m2e.tycho.feature_1.0.0.qualifier.jar" id="org.ancit.m2e.tycho.feature" version="1.0.0.qualifier">
+      <category name="new_category_1"/>
+   </feature>
+   <category-def name="new_category_1" label="Tycho Utilities"/>
+</site>

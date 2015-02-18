@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+  <template name="tycho plugin" description="Tycho Plugin Configuration"
+    id="org.ancit.m2e.tycho.templates.tychoplugin" context="org.eclipse.m2e.editor.xml.templates.contextType.plugins"
+    enabled="true" autoinsert="false">
+    <plugin>
+    	<!-- Alter the Tycho version as per your requirement -->
+		<groupId>org.eclipse.tycho</groupId>
+		<artifactId>tycho-maven-plugin</artifactId>
+		<version>0.22.0${cursor}</version>
+		<extensions>true</extensions>
+	</plugin>
+  </template>
+  
+   <template name="eclipse repository" description="Eclipse p2 Repository Configuration"
+    id="org.ancit.m2e.tycho.templates.repoconfiguration" context="org.eclipse.m2e.editor.xml.templates.contextType.repositories"
+    enabled="true" autoinsert="false">
+    <repository>
+        <!-- Alter the URL according to your p2 Layout -->
+        <id>eclipse-repo</id>
+        <layout>p2</layout>
+        <url>http://download.eclipse.org/releases/kepler/</url>        
+	</repository>
+  </template>
+  
+  <template name="eclipse product" description="tycho-p2-director-plugin responsible for eclipse product build"
+    id="org.ancit.m2e.tycho.templates.eclipseproduct" context="org.eclipse.m2e.editor.xml.templates.contextType.plugins"
+    enabled="true" autoinsert="false">
+    <repository>
+        <!-- Alter the Tycho version accordingly -->
+        <plugin>
+  			<groupId>org.eclipse.tycho</groupId>
+  			<artifactId>tycho-p2-director-plugin</artifactId>
+  			<version>0.22.0{$cursor}</version>
+  			<executions>
+  			  <execution>
+            <!-- install the product using the p2 director -->  
+		     <id>materialize-products</id>  
+     		<goals>  
+      		<goal>materialize-products</goal>  
+     		</goals>
+          </execution>
+          <execution>
+          	<id>archive-products</id>  
+     		<goals>  
+      			<goal>archive-products</goal>  
+     		</goals>
+          	</execution>
+  		</executions>
+</plugin>        
+	</repository>
+  </template>
+ </templates>
