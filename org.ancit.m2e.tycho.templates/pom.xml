@@ -9,6 +9,6 @@
 		<groupId>tycho.utils</groupId>
 		<artifactId>tycho.utils</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../../egitExtension/tycho.utils</relativePath>
+		<relativePath>../tycho.utils</relativePath>
 	</parent>
 </project>

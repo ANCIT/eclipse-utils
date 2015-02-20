@@ -28,8 +28,8 @@
 		</plugins>
 	</build>
 	<modules>
-		<module>../../cob-rcp/org.ancit.m2e.tycho.templates</module>
 		<module>../org.ancit.m2e.tycho.feature</module>
 		<module>../org.ancit.m2e.tycho.p2site</module>
+		<module>../org.ancit.m2e.tycho.templates</module>
 	</modules>
 </project>
