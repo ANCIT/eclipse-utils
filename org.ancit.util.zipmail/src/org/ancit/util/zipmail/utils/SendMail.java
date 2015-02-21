@@ -94,6 +94,7 @@ public class SendMail {
 	         simpleMessage.setContent(multipart );
 	         
 			Transport.send(simpleMessage);
+			System.out.println("Email Sent Successfully..!");
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
