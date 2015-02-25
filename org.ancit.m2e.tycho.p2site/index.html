@@ -1,60 +1,44 @@
 <html>
 <head>
-<title>org.ancit.m2e.tycho.p2site</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<style>@import url("web/site.css");</style>
-<script type="text/javascript">
-	var returnval = 0;
-	var stylesheet, xmlFile, cache, doc;
-	function init(){
-		// NSCP 7.1+ / Mozilla 1.4.1+ / Safari
-		// Use the standard DOM Level 2 technique, if it is supported
-		if (document.implementation && document.implementation.createDocument) {
-			xmlFile = document.implementation.createDocument("", "", null);
-			stylesheet = document.implementation.createDocument("", "", null);
-			if (xmlFile.load){
-				xmlFile.load("site.xml");
-				stylesheet.load("web/site.xsl");
-			} else {
-				alert("Document could not be loaded by browser.");
-			}
-			xmlFile.addEventListener("load", transform, false);
-			stylesheet.addEventListener("load", transform, false);
-		}
-		//IE 6.0+ solution
-		else if (window.ActiveXObject) {
-			xmlFile = new ActiveXObject("msxml2.DOMDocument.3.0");
-			xmlFile.async = false;
-			xmlFile.load("site.xml");
-			stylesheet = new ActiveXObject("msxml2.FreeThreadedDOMDocument.3.0");
-			stylesheet.async = false;
-			stylesheet.load("web/site.xsl");
-			cache = new ActiveXObject("msxml2.XSLTemplate.3.0");
-			cache.stylesheet = stylesheet;
-			transformData();
-		}
-	}
-	// separate transformation function for IE 6.0+
-	function transformData(){
-		var processor = cache.createProcessor();
-		processor.input = xmlFile;
-		processor.transform();
-		data.innerHTML = processor.output;
-	}
-	// separate transformation function for NSCP 7.1+ and Mozilla 1.4.1+ 
-	function transform(){
-		returnval+=1;
-		if (returnval==2){
-			var processor = new XSLTProcessor();
-			processor.importStylesheet(stylesheet); 
-			doc = processor.transformToDocument(xmlFile);
-			document.getElementById("data").innerHTML = doc.documentElement.innerHTML;
-		}
-	}
-</script>
+<title>tycho-utils</title>
 </head>
-<body onload="init();">
-<!--[insert static HTML here]-->
-<div id="data"><!-- this is where the transformed data goes --></div>
+<body>
+This is a p2 repository for tycho-utilities. Use this link on Install Manager or in MarketPlace to install this plugin in your Eclipse.
+<br><br>
+<b>About tycho-utilities</b><br>
+We have been helping our client migrate to maven tycho, and the biggest problem that we face is when filling the parent pom to remember the maven-tycho plugin tags or repository tags, tycho-p2-director-plugin tag for product packaging.
+Therefore we @ ancit have created a tycho utils plugin which currently contributes more tycho specific code templates to the Maven Editor.
+<br>
+Currently it provides 4 Code Templates
+<ul>
+  <li>maven-tycho-plugin</li>
+  <li>repository pointing to p2Layout</li>
+  <li>tycho-p2-director-plugin</li>
+  <li>target-platform-configuration</li>
+</ul>
+
+In this plugin we also plan to address issues like<br>
+1. Code template for
+<ul>
+  <li>Handling Non OSGI Libraries</li>
+  <li>Version Handling</li>
+  <li>Content Inclusion @ root of the Application like JRE etc</li>
+</ul>
+
+2. New archetype for Maven Tycho Projects
+<ul>
+  <li>eclipse-plugin</li>
+  <li>eclipse-feature</li>
+  <li>eclipse-repository</li>
+</ul>
+
+3. On selection of a Project of PDE Nature
+<ul>
+  <li>add eclipse-plugin as packaging type</li>
+  <li>include maven-tycho plugin</li>
+  <li>define repository tag etc.</li>
+</ul>
+- See more at: http://marketplace.eclipse.org/content/maven-tycho-utilities<br>
+- Fork us on https://github.com/ANCIT/eclipse-utils
 </body>
 </html>

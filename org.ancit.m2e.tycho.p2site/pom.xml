@@ -53,7 +53,7 @@
          <includes>**</includes>
          <toDir>${ftp.toDir}</toDir>
          <url>${ftp.url}</url>
-         <serverId>ftp-repository</serverId>
+         <serverId>ancgrp-ftp</serverId>
          <!-- Points to your settings.xml 
          where the connection settings are 
           stored as shown below -->
