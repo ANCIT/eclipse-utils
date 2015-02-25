@@ -429,7 +429,7 @@ litigation.
    <requires>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.ui.editors" version="3.8.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.editors"/>
    </requires>
 
    <plugin
