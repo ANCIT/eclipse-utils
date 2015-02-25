@@ -26,8 +26,7 @@
             id="org.ancit.m2e.tycho.templates.eclipseproduct"
             name="eclipse product">
          <pattern>
-            &lt;repository&gt;
-        &lt;!-- Alter the Tycho version accordingly --&gt;
+            &lt;!-- Alter the Tycho version accordingly --&gt;
         &lt;plugin&gt;
   			&lt;groupId&gt;org.eclipse.tycho&lt;/groupId&gt;
   			&lt;artifactId&gt;tycho-p2-director-plugin&lt;/artifactId&gt;
@@ -47,8 +46,7 @@
      		&lt;/goals&gt;
           	&lt;/execution&gt;
   		&lt;/executions&gt;
-&lt;/plugin&gt;        
-	&lt;/repository&gt;
+&lt;/plugin&gt;
             
          </pattern>
       </template>
@@ -65,6 +63,50 @@
         &lt;layout&gt;p2&lt;/layout&gt;
         &lt;url&gt;http://download.eclipse.org/releases/kepler/&lt;/url&gt;        
 &lt;/repository&gt;
+         </pattern>
+      </template>
+      <template
+            autoinsert="true"
+            contextTypeId="org.eclipse.m2e.editor.xml.templates.contextType.plugins"
+            description="Target Platform Configuration for Eclipse Product"
+            id="org.ancit.m2e.tycho.templates.targetplatformconfig"
+            name="eclipse target platform configuration">
+         <pattern>
+            <!-- Retain the Required Target Platform Configuration as desired -->       
+        <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>target-platform-configuration</artifactId>
+                <version>0.220</version>
+                <configuration>
+                    <environments>
+                        <environment>
+                            <os>linux</os>
+                            <ws>gtk</ws>
+                            <arch>x86</arch>
+                        </environment>
+                        <environment>
+                            <os>linux</os>
+                            <ws>gtk</ws>
+                            <arch>x86_64</arch>
+                        </environment>
+                        <environment>
+                            <os>win32</os>
+                            <ws>win32</ws>
+                            <arch>x86</arch>
+                        </environment>
+                        <environment>
+                            <os>win32</os>
+                            <ws>win32</ws>
+                            <arch>x86_64</arch>
+                        </environment>
+                        <environment>
+                            <os>macosx</os>
+                            <ws>cocoa</ws>
+                            <arch>x86_64</arch>
+                        </environment>
+                    </environments>
+                </configuration>
+            </plugin>
          </pattern>
       </template>
    </extension>
