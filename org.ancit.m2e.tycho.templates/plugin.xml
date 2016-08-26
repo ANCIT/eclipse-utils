@@ -73,41 +73,42 @@
             name="eclipse target platform configuration">
          <pattern>
             <!-- Retain the Required Target Platform Configuration as desired -->       
-        <plugin>
-                <groupId>org.eclipse.tycho</groupId>
-                <artifactId>target-platform-configuration</artifactId>
-                <version>0.220</version>
-                <configuration>
-                    <environments>
-                        <environment>
-                            <os>linux</os>
-                            <ws>gtk</ws>
-                            <arch>x86</arch>
-                        </environment>
-                        <environment>
-                            <os>linux</os>
-                            <ws>gtk</ws>
-                            <arch>x86_64</arch>
-                        </environment>
-                        <environment>
-                            <os>win32</os>
-                            <ws>win32</ws>
-                            <arch>x86</arch>
-                        </environment>
-                        <environment>
-                            <os>win32</os>
-                            <ws>win32</ws>
-                            <arch>x86_64</arch>
-                        </environment>
-                        <environment>
-                            <os>macosx</os>
-                            <ws>cocoa</ws>
-                            <arch>x86_64</arch>
-                        </environment>
-                    </environments>
-                </configuration>
-            </plugin>
-         </pattern>
+			&lt;plugin&gt;&#13;
+				&lt;groupId&gt;org.eclipse.tycho&lt;/groupId&gt;&#13;
+				&lt;artifactId&gt;target-platform-configuration&lt;/artifactId&gt;&#13;
+				&lt;version&gt;${cursor}0.22.0&lt;/version&gt;&#13;
+				&lt;configuration&gt;&#13;
+					&lt;pomDependencies&gt;consider&lt;/pomDependencies&gt;&#13;
+					&lt;environments&gt;&#13;
+						&lt;environment&gt;&#13;
+							&lt;os&gt;linux&lt;/os&gt;&#13;
+							&lt;ws&gt;gtk&lt;/ws&gt;&#13;
+							&lt;arch&gt;x86&lt;/arch&gt;&#13;
+						&lt;/environment&gt;&#13;
+						&lt;environment&gt;&#13;
+							&lt;os&gt;linux&lt;/os&gt;&#13;
+							&lt;ws&gt;gtk&lt;/ws&gt;&#13;
+							&lt;arch&gt;x86_64&lt;/arch&gt;&#13;
+						&lt;/environment&gt;&#13;
+						&lt;environment&gt;&#13;
+							&lt;os&gt;win32&lt;/os&gt;&#13;
+							&lt;ws&gt;win32&lt;/ws&gt;&#13;
+							&lt;arch&gt;x86&lt;/arch&gt;&#13;
+						&lt;/environment&gt;&#13;
+						&lt;environment&gt;&#13;
+							&lt;os&gt;win32&lt;/os&gt;&#13;
+							&lt;ws&gt;win32&lt;/ws&gt;&#13;
+							&lt;arch&gt;x86_64&lt;/arch&gt;&#13;
+						&lt;/environment&gt;&#13;
+						&lt;environment&gt;&#13;
+							&lt;os&gt;macosx&lt;/os&gt;&#13;
+							&lt;ws&gt;cocoa&lt;/ws&gt;&#13;
+							&lt;arch&gt;x86_64&lt;/arch&gt;&#13;
+						&lt;/environment&gt;&#13;
+					&lt;/environments&gt;&#13;
+				&lt;/configuration&gt;&#13;
+			&lt;/plugin&gt;
+		</pattern>
       </template>
    </extension>
 
